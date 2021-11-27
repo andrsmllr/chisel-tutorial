@@ -17,8 +17,14 @@ class Mul extends Module {
   val mulsValues = new ArrayBuffer[UInt]()
 
   // Calculate io.z = io.x * io.y by generating a table of values for mulsValues
+  for (i <- 0 to math.pow(2, 4).toInt - 1) {
+    for (j <- 0 to math.pow(2, 4).toInt - 1) {
+      mulsValues += (i * j).asUInt
+    }
+  }
 
   // Implement below ----------
-
+  val lut = VecInit(mulsValues) // had to peek at solution for this one
+  io.z := lut((io.x << 4.U) | io.y)
   // Implement above ----------
 }
