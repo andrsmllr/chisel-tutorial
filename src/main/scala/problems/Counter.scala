@@ -17,8 +17,10 @@ object Counter {
   // Modify below ----------
   def counter(max: UInt, en: Bool, amt: UInt): UInt = {
     val x = RegInit(0.U(max.getWidth.W))
-    x := wrapAround(x + 1.U, max)
-    x
+    when (en) {
+      x := wrapAround(x + amt, max)
+    }
+    return x
   }
   // Modify above ----------
 
